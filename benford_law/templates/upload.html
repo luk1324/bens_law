@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+<title>{% block title%} Home {% endblock %}</title>
+{% block content %}
+    
+    {% if success %}
+        <div class="alert alert-success" role="alert">
+            Data was saved properly
+            {{txt}}
+        </div>
+    {% endif %}
+
+    {% if no_desired_column %}
+        <div class="modal fade" id="columns_proposal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">No desired columnn</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                {% if no_columns == False %}
+                    <p class="lead mb-5">System didn`t found desired column.<br>We found numeric data in your file, choose column to analyse:</p>
+                    {% for cols in columns %}
+                        <a class="btn btn-primary send_column" role="button" value="{{cols}}">{{cols}}</a>
+                    {% endfor %}
+                {% endif %}
+                {% if no_columns%}
+                    <p class="lead mb-5">System didn`t found desired column.<br>There are no valid columns to anlize.</p>
+                    
+                {% endif %}
+                {% if result == False %}
+                    <div class="alert alert-danger" role="alert">
+                        Data must contain all leading numbers in range of 1 to 9
+                        {{txt}}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style='width:10vw'>Close</button><br>
+            </div>
+            </div>
+        </div>
+        </div>
+        <script>
+            $(document).ready(function(){
+                $("#columns_proposal").modal('show');
+            });
+        </script>
+    {% endif %}
+
+    
+    <div class='row'><div class='col-2'></div>
+        <div class='col-8'>
+            <h1>
+            Upload DataSet File
+            </h1>
+            <form method="POST" enctype='multipart/form-data'>
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="mb-3">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {% for error in field.errors %}
+                        <p class="help-block text-danger">{{error}}</p>
+                    {% endfor %}
+                </div>
+                
+
+                {% endfor%}
+                
+                    {% comment %} <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1">
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                    </div> {% endcomment %}
+
+                <br>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    <div class='col-2'></div></div>
+    
+{% endblock %}

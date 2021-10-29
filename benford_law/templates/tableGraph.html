@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+<title>{% block title%} Home {% endblock %}</title>
+{% block content %}
+    
+{{ dict_data|json_script:'benfords_data' }}
+    <h1>
+        Your results:
+    </h1>
+        <div class="row">
+            <div class="col-4">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                            <th scope="col">Number</th>
+                            <th scope="col">Your_Result</th>
+                            <th scope="col">Benfords_Result</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if result%}
+                                {% for t in temp %}
+                                    <tr>
+                                    <th scope="row">{{ t.num }}</th>
+                                    <td>{{ t.your }}</td>
+                                    <td>{{ t.ben }}</td>
+                                    </tr>
+                                {% endfor %}
+                            {% endif %}
+                        </tbody>
+                    </table>
+            </div>
+            <div class="col-8">
+                <div id="chart_div"></div>
+            </div>
+        </div>
+
+
+
+
+{% endblock %}

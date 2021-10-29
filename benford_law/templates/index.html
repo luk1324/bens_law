@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+<title>{% block title%} Home {% endblock %}</title>
+{% block content %}
+    <div class='row'><div class='col-2'></div>
+            <div class='col-8'>
+                <h1>
+                    What is Benford’s Law?
+                </h1>
+                <p class="lead mb-5">Benford’s Law states that, in a naturally occurring set of numbers, the smaller digits appear disproportionately more often as the leading digits. The leading digits have the distribution shown in the following table, where the number 1 appears slightly more than 30% of the time as the leading digit, and the number 9 appears as the leading digit less than 5% of the time (which is a difference of 6x).</p>
+                <p>&nbsp;1 = 30.1% frequency of occurrence<br>&nbsp;2 = 17.6% frequency of occurrence<br>&nbsp;3 = 12.5% frequency of occurrence<br>&nbsp;4 = 9.7% frequency of occurrence<br>&nbsp;5 = 7.9% frequency of occurrence<br>&nbsp;6 =&nbsp;6.7% frequency of occurrence<br>&nbsp;7 =&nbsp;5.8% frequency of occurrence<br>&nbsp;8 =&nbsp;5.1% frequency of occurrence<br>&nbsp;9 = 4.6% frequency of occurrence</p>
+            <div class='col-2'></div>
+    </div>
+    
+{% endblock %}
